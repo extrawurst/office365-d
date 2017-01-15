@@ -8,7 +8,7 @@ import office365;
 
 void main()
 {
-	// grab your auth token on https://oauthplay.azurewebsites.net
+	// grab your Access token on https://oauthplay.azurewebsites.net
 	auto token = environment["OFFICE365_TOKEN"];
 
 	auto api = createOfficeApi(token);
@@ -20,5 +20,19 @@ void main()
 	
 	auto res = api.calendarview(start, to);
 
-	writefln("res: %s",res);
+	writefln("events: %s\n",res);
+
+	Messages resMail = api.messages(DefaultFolder.Inbox, "isread eq false", 
+		SelectBuilder()
+		.add(Select.From)
+		.add(Select.Subject).toString);
+
+	writefln("inbox: %s\n", serializeToJson(resMail).toPrettyString);
+
+	assert(!resMail.value[0].IsRead);
+	auto updateRes = api.updateRead(resMail.value[0].Id,true);
+	assert(updateRes.IsRead);
+	updateRes = api.updateRead(resMail.value[0].Id,false);
+	assert(!updateRes.IsRead);
+	writefln("update: %s\n", serializeToJson(updateRes).toPrettyString);
 }
