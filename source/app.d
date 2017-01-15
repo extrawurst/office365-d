@@ -13,7 +13,7 @@ void main()
 
 	auto api = createOfficeApi(token);
 
-	auto time = Clock.currTime;
+	immutable time = Clock.currTime;
 	DateTime start = cast(DateTime)time;
 	start.timeOfDay = TimeOfDay.init;
 	auto to = start + days(1);

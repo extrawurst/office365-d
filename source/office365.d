@@ -162,9 +162,9 @@ struct Message
 @path("/api/v2.0/me")
 interface Office365Api
 {
-    /// uses https://outlook.office.com/api/v2.0/me/calendarview
-    @method(HTTPMethod.GET)
-    Events calendarview(DateTime startdatetime, DateTime enddatetime);
+	/// uses https://outlook.office.com/api/v2.0/me/calendarview
+	@method(HTTPMethod.GET)
+	Events calendarview(DateTime startdatetime, DateTime enddatetime);
 
 	@queryParam("_filter", "$filter")
 	@queryParam("_top", "$top")
@@ -173,7 +173,7 @@ interface Office365Api
 	@method(HTTPMethod.GET)
 	{
 		@queryParam("_count", "$count")
-    	Messages messages(string _folder, bool _count, string _filter, string _select="", int _top=10);
+		Messages messages(string _folder, bool _count, string _filter, string _select="", int _top=10);
 		Messages messages(string _folder, string _filter="", string _select="", int _top=10);
 	}
 
