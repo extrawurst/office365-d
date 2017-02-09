@@ -62,12 +62,73 @@ struct Event
 	///
 	bool IsAllDay;
 	///
+	bool IsCancelled;
+	///
+	bool IsOrganizer;
+	///
+	@byName EventImportance Importance;
+	///
 	EventDate Start;
 	///
 	EventDate End;
 	///
 	EventLocation Location;
+	///
+	EventResponseStatus ResponseStatus;
+	///
+	EventAttendees[] Attendees;
+	///
+	@optional
+	string OnlineMeetingUrl;
+
 }
+
+///
+struct EventAttendees
+{
+	///
+	EventAttendeesType Type;
+	///
+	EventResponseStatus Status;
+	///
+	@name("EmailAddress") 
+	EmailAddress _EmailAddress;
+}
+
+///
+enum EventAttendeesType
+{
+	Required,
+	Optional
+}
+
+///
+enum EventImportance
+{
+	Normal,
+	High,
+	Low
+}
+
+///
+enum ResponseState
+{
+	Organizer,
+	None,
+	NotResponded,
+	Accepted,
+	Declined
+}
+
+///
+struct EventResponseStatus 
+{
+	///
+	@byName ResponseState Response;
+	///
+	string Time;
+}
+
 
 ///
 struct MessageBody

@@ -5,3 +5,7 @@ __dummy.html
 *.obj
 __test__*__
 dub.selections.json
+
+liboffice365-d\.a
+
+office365-d
